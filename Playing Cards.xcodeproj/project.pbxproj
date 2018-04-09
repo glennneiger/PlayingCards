@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A1881FC207B007800F140F4 /* PlayingCardBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1881FB207B007800F140F4 /* PlayingCardBehavior.swift */; };
 		9AF941C4207AC76200E8EF74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF941C3207AC76200E8EF74 /* AppDelegate.swift */; };
 		9AF941C6207AC76200E8EF74 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF941C5207AC76200E8EF74 /* ViewController.swift */; };
 		9AF941C9207AC76200E8EF74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AF941C7207AC76200E8EF74 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A1881FB207B007800F140F4 /* PlayingCardBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardBehavior.swift; sourceTree = "<group>"; };
 		9AF941C0207AC76200E8EF74 /* Playing Cards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Playing Cards.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AF941C3207AC76200E8EF74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AF941C5207AC76200E8EF74 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				9AF941C7207AC76200E8EF74 /* Main.storyboard */,
 				9AF941CA207AC76300E8EF74 /* Assets.xcassets */,
 				9AF941CF207AC76300E8EF74 /* Info.plist */,
+				9A1881FB207B007800F140F4 /* PlayingCardBehavior.swift */,
 			);
 			path = "Playing Cards";
 			sourceTree = "<group>";
@@ -164,6 +167,7 @@
 				9AF941D9207ACE2500E8EF74 /* PlayingCardDeck.swift in Sources */,
 				9AF941D7207ACD9800E8EF74 /* PlayingCard.swift in Sources */,
 				9AF941DC207ACE9B00E8EF74 /* PlayingCardView.swift in Sources */,
+				9A1881FC207B007800F140F4 /* PlayingCardBehavior.swift in Sources */,
 				9AF941C4207AC76200E8EF74 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
