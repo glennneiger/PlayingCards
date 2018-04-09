@@ -11,30 +11,16 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet var cardViews: [PlayingCardView]!
-    private var deck = PlayingCardDeck()
     
     lazy var animator = UIDynamicAnimator(referenceView: view)
     
     lazy var cardBehavior = PlayingCardBehavior(in: animator)
     
+    private var flipsCount = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        var cards = [PlayingCard]()
-        
-        for _ in 1...((cardViews.count + 1) / 2) {
-            let card = deck.draw()!
-            cards += [card, card]
-        }
-        
-        for cardView in cardViews {
-            cardView.isFaceUp = false
-            let card = cards.remove(at: cards.count.arc4random)
-            cardView.rank = card.rank.order
-            cardView.suit = card.suit.rawValue
-            cardBehavior.addItem(cardView)
-            cardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(flipCard(_:))))
-        }
+        setupCardViews(hasToAddGesture: true)
     }
     
     private var cardsMatch: Bool {
@@ -45,6 +31,10 @@ class ViewController: UIViewController {
     
     private var faceUpCardViews: [PlayingCardView] {
         return cardViews.filter { $0.isFaceUp && !$0.isHidden }
+    }
+    
+    private var isGameEnded: Bool {
+        return cardViews.filter { !$0.isHidden }.count == 0
     }
     
     @objc
@@ -64,6 +54,7 @@ class ViewController: UIViewController {
             return
         }
         
+        flipsCount += 1
         cardBehavior.removeItem(choosenCardView)
         UIView.transition(with: choosenCardView,
               duration: 0.5,
@@ -118,8 +109,48 @@ class ViewController: UIViewController {
                         cardView.isHidden = true
                         cardView.alpha = 1
                         cardView.transform = CGAffineTransform.identity
+                        
+                        if self.isGameEnded {
+                            self.showGameEnd()
+                        }
                 })
         })
+    }
+    
+    func showGameEnd() {
+        let alert = UIAlertController(title: "Game over", message: "Total flips: \(flipsCount)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Jugar otra vez", style: .default, handler: { _ in
+            self.restartGame()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func restartGame() {
+        setupCardViews(hasToAddGesture: false)
+    }
+    
+    func setupCardViews(hasToAddGesture addGesture: Bool) {
+        var deck = PlayingCardDeck()
+        var cards = [PlayingCard]()
+        
+        for _ in 1...((cardViews.count + 1) / 2) {
+            let card = deck.draw()!
+            cards += [card, card]
+        }
+        
+        for cardView in cardViews {
+            cardView.isFaceUp = false
+            cardView.isHidden = false
+            cardView.alpha = 1
+            let card = cards.remove(at: cards.count.arc4random)
+            cardView.rank = card.rank.order
+            cardView.suit = card.suit.rawValue
+            cardBehavior.removeItem(cardView)
+            cardBehavior.addItem(cardView)
+            if addGesture {
+              cardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(flipCard(_:))))
+            }
+        }
     }
 }
 
